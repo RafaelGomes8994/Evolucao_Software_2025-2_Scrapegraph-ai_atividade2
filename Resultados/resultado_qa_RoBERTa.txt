@@ -1,0 +1,17 @@
+=== RESULTADO MODELO 2 (QA) ===
+Contexto: C:\Faculdade\Engenharia de Software 2\Evolucao_Software_2025-2_Scrapegraph-ai_atividade2\Scrapegraph-ai\CONTRIBUTING.md
+
+P: What is the main branch name?
+R: pre/beta
+Score: 0.0582
+------------------------------
+P: How do I submit a contribution?
+R: 
+ 
+Score: 0.0015
+------------------------------
+P: Is there a release schedule?
+R: 
+
+Score: 0.0014
+------------------------------

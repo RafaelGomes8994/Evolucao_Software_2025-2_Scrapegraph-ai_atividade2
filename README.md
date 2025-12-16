@@ -1,123 +1,127 @@
-# 🚀 Atividade 2: Análise de Governança e Fluxo de Trabalho com LLMs
+# 🚀 Atividade 2: Análise de Governança de Software com LLMs
 
-**Repositório da Atividade:** `Evolucao_Software_2025-2_Scrapegraph-ai_atividade2`
-**Projeto Alvo:** `Scrapegraph-ai` (Mesmo da Atividade 1)
+**Projeto Alvo:** `Scrapegraph-ai`
+**Disciplina:** Evolução de Software (2025.2)
 
-Esta atividade foca na identificação da **Governança do Projeto**, especificamente:
-1.  **Modelo de Fluxo de Trabalho (Branching Model):** O "sistema circulatório" (como o código é organizado).
-2.  **Estratégia de Releases (Release Strategy):** O "ritmo cardíaco" (como e quando o software é entregue).
+Este repositório contém os artefatos e a automação desenvolvida para a análise de **Governança de Projetos Open Source** utilizando Inteligência Artificial. O objetivo é identificar automaticamente, através de Modelos de Linguagem (LLMs), as regras de contribuição e lançamento de versões do projeto.
 
 ---
 
-## 👥 Componentes da Equipe
+## 👥 Equipe
 
-| Nome | Matrícula | Contribuição na Atividade 2 |
+| Nome Completo | Matrícula | Contribuição na Atividade |
 | :--- | :--- | :--- |
-| Maria Eduarda M. da Silva | 202300038860 | Validação Manual da Governança e Relatório |
-| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual e Edição de Vídeo |
-| Cauan Teixeira Machado | 202300038627 | Script e Análise com Modelo 1 (BART - Classificação) |
-| Pedro Joaquim Silva Silveira | 202300038897 | Script e Análise com Modelo 1 (BART - Classificação) |
-| Breno Silva do Nascimento | 202300038968 | Script e Análise com Modelo 2 (RoBERTa - QA) |
-| José Gabriel R. G. de Almeida | 202300095599 | Script e Análise com Modelo 2 (RoBERTa - QA) |
-| José Victor Ribeiro de Jesus | 202300038799 | Script e Análise com Modelo 3 (Flan-T5 - Geração) |
-| Mateus da Silva Barreto | 202300038879 | Script e Análise com Modelo 3 (Flan-T5 - Geração) |
+| Maria Eduarda M. da Silva | 202300038860 | |
+| Rafael Gomes Oliveira Santos | 202300095730 | |
+| Cauan Teixeira Machado | 202300038627 | |
+| Pedro Joaquim Silva Silveira | 202300038897 | |
+| Breno Silva do Nascimento | 202300038968 | |
+| José Gabriel R. G. de Almeida | 202300095599 | |
+| José Victor Ribeiro de Jesus | 202300038799 | |
+| Mateus da Silva Barreto | 202300038879 | |
 
 ---
 
-## 🎯 1. Objetivo e Metodologia
+## 🎯 Metodologia e Objetivos
 
-O objetivo desta etapa foi utilizar **Inteligência Artificial (Processamento de Linguagem Natural)** para ler a documentação do projeto (`CONTRIBUTING.md`, `README.md`) e inferir automaticamente suas estratégias de governança.
+Nesta atividade, comparamos a análise humana (Auditoria Manual) com a análise automatizada por IAs para determinar:
+1.  **Branching Model (Fluxo de Trabalho):** Como o código é integrado? (Ex: Gitflow, GitHub Flow, Trunk-Based).
+2.  **Release Strategy (Estratégia de Lançamento):** Qual a frequência de lançamentos? (Ex: Rapid Releases, LTS, Release Train).
 
-### 1.1. A "Verdade" Manual (Gabarito)
-Antes de executar as IAs, realizamos uma auditoria manual no repositório para estabelecer a verdade:
-* **Branching Model:** Identificamos como **GitHub Flow**. O projeto utiliza uma branch `main` estável e recebe contribuições via Pull Requests diretos. Não existe branch `develop` (característica do Gitflow).
-* **Estratégia de Releases:** Identificamos como **Rapid Releases**. O projeto utiliza Semantic Versioning (v0.x.x) com lançamentos frequentes baseados em features, sem janelas de suporte de longo prazo (LTS) explícitas.
+### 1. A "Verdade" (Auditoria Manual)
+Após auditoria nas abas *Branches* e *Releases* do repositório `Scrapegraph-ai`, a equipe identificou:
+* **Branching:** **GitHub Flow** (Apenas branch `main` ativa e branches de feature temporárias; ausência de branch `develop`).
+* **Releases:** **Rapid Releases** (Lançamentos semanais frequentes, ex: v1.66, v1.65).
 
-### 1.2. Modelos de IA Selecionados (Hugging Face)
-Selecionamos 3 modelos distintos, focados em interpretação de texto, para validar se eles conseguiam chegar à mesma conclusão que nós:
+### 2. Os Modelos de IA Selecionados
+Desenvolvemos scripts Python que utilizam a biblioteca `transformers` para ler arquivos de documentação (`CONTRIBUTING.md`, `CHANGELOG.md`, `README.md`).
 
-1.  **`facebook/bart-large-mnli` (Zero-Shot Classification):**
-    * *Estratégia:* Classificar o texto em categorias pré-definidas (ex: "Gitflow" vs "GitHub Flow") sem treinamento prévio.
-2.  **`deepset/roberta-base-squad2` (Question Answering):**
-    * *Estratégia:* "Entrevistar" a documentação fazendo perguntas específicas (ex: "Qual é a branch principal?").
-3.  **`google/flan-t5-large` (Text2Text Generation):**
-    * *Estratégia:* Pedir para a IA ler o arquivo de contribuição e gerar um resumo explicativo sobre o processo.
+* **Modelo 1: `facebook/bart-large-mnli` (Classificação Zero-Shot)**
+    * *Estratégia:* Analisa o texto combinado do `CONTRIBUTING.md` e `CHANGELOG.md` para classificar o projeto em categorias pré-definidas.
+* **Modelo 2: `deepset/roberta-base-squad2` (Question Answering)**
+    * *Estratégia:* Realiza perguntas diretas ao texto (ex: "What is the main branch?") para extrair trechos específicos.
+* **Modelo 3: (Modelo Generativo)**
+    * *Estratégia:* Geração de resumo textual focado em governança.
 
 ---
 
-## 🛠️ 2. Tutorial de Execução
+## 🛠️ Instalação e Execução
 
-### 2.1. Estrutura de Pastas
-A estrutura do projeto para esta atividade é a seguinte:
-. ├── reports/ # Logs de execução e resultados (.txt) │ ├── resultado_classificacao_BART.txt │ ├── resultado_qa_RoBERTa.txt │ └── resultado_geracao_FlanT5.txt │ ├── scripts/ # Scripts Python desenvolvidos pela equipe │ ├── analise_classificacao.py (Modelo 1) │ ├── analise_qa.py (Modelo 2) │ └── analise_geracao.py (Modelo 3) │ ├── Scrapegraph-ai/ # O repositório alvo (apenas documentação necessária) ├── venv/ # Ambiente Virtual │ ├── README.md # Este documento └── requirements.txt # Dependências (transformers, torch, etc.)
+### Pré-requisitos
+* Python 3.10 ou superior
+* Git
 
+### Passo a Passo
 
-### 2.2. Instalação e Configuração
-
-1.  **Clone este repositório** e navegue para a pasta raiz.
-2.  **Crie e ative o ambiente virtual:**
+1.  **Clone este repositório da atividade:**
     ```bash
+    git clone https://github.com/RafaelGomes8994/Evolucao_Software_2025-2_Scrapegraph-ai_atividade2.git
+
+    cd Evolucao_Software_2025-2_Scrapegraph-ai_atividade2
+    ```
+
+2.  **Clone o projeto alvo (Scrapegraph-ai) na raiz:**
+    É necessário ter o código do projeto alvo para que os scripts possam ler a documentação.
+    ```bash
+    git clone https://github.com/ScrapeGraphAI/Scrapegraph-ai.git
+    ```
+
+3.  **Crie e Configure o Ambiente Virtual (venv):**
+    Isso isola as dependências do projeto para evitar conflitos no seu sistema.
+    ```bash
+    # Cria o ambiente virtual chamado 'venv'
     python -m venv venv
-    # Windows:
+
+    # Ativa o ambiente:
+    # No Windows:
     .\venv\Scripts\activate
-    # Linux/Mac:
+    # No Linux/Mac:
     source venv/bin/activate
     ```
-3.  **Instale as dependências:**
+
+4.  **Instale as Dependências:**
     ```bash
     pip install -r requirements.txt
     ```
 
-### 2.3. Execução dos Scripts
+5.  **Execute os Scripts de Análise:**
+    Os resultados serão gerados na pasta `Resultados/`.
 
-Execute os scripts a partir da raiz do projeto para gerar os relatórios na pasta `reports/`:
+    ```bash
+    # Modelo 1: Classificação (BART)
+    python Scripts/facebook-bart-large-mnli/analise_classificacao.py
 
-* **Modelo 1 (Classificação):**
-    ```bash
-    python scripts/analise_classificacao.py
-    ```
-* **Modelo 2 (Perguntas e Respostas):**
-    ```bash
-    python scripts/analise_qa.py
-    ```
-* **Modelo 3 (Geração de Resumo):**
-    ```bash
-    python scripts/analise_geracao.py
+    # Modelo 2: Perguntas e Respostas (RoBERTa)
+    python Scripts/deepset-roberta-base-squad2/analise_qa.py
+
+    # Modelo 3: Geração de Texto
+    python Scripts/google-flan-t5-large/analise_geracao.py
     ```
 
 ---
 
-## 📊 3. Resultados e Comparação
+## 📊 Resultados e Discussão
 
-Abaixo apresentamos a comparação entre o que os modelos encontraram e a realidade do projeto.
-
-| Modelo | Tarefa NLP | Branching Identificado | Estratégia Release Identificada | Efetividade |
+| Modelo | Tarefa NLP | Branching Identificado | Estratégia Release Identificada | Análise da Equipe |
 | :--- | :--- | :--- | :--- | :--- |
-| **`facebook/bart-large-mnli`** | Classificação (Zero-Shot) | **GitHub Flow** (Score Alto) | **Rapid Releases** (Score Médio) | **Alta** (Vencedor) |
-| **`deepset/roberta-base-squad2`** | Question Answering | Identificou "main branch" e "pull requests". | Inconclusivo (Respostas vagas). | **Média** |
-| **`google/flan-t5-large`** | Text Generation | Resumiu o uso de PRs corretamente. | Mencionou versionamento semântico. | **Alta** |
+| **BART-Large-MNLI** | Classificação | **Trunk Based Development** (Score: 0.38) | **Long Term Support - LTS** (Score: 0.43) | **Parcialmente Correto.** O modelo acertou o fluxo ágil (Trunk Based ≈ GitHub Flow), mas a inclusão do `CHANGELOG.md` (com histórico antigo) confundiu o modelo, levando-o a classificar erroneamente como LTS. |
+| **RoBERTa-SQuAD2** | QA (Extração) | Branch **`pre/beta`** | Inconclusivo | **Média.** O modelo foi eficaz em encontrar nomes de branches existentes no texto, mas falhou em interpretar o contexto global da estratégia. |
+| **Modelo 3** | Geração | *Aguardando Definição* | *Aguardando Definição* | *Análise Pendente* |
 
-### 3.1. Análise Detalhada e Justificativa
-
-* **Vencedor (Mais Efetivo): `facebook/bart-large-mnli`**
-    * **Justificativa:** Para identificar governança, muitas vezes precisamos classificar o projeto em "caixas" conceituais (ex: é Gitflow ou não?). O modelo Zero-Shot foi capaz de ler o texto ambíguo do `CONTRIBUTING.md` e atribuir corretamente a probabilidade mais alta para **GitHub Flow** e **Rapid Releases**, alinhando-se perfeitamente com nossa análise manual.
-
-* **O Papel do `roberta-base-squad2`:**
-    * Embora não tenha dado o "nome" da estratégia, ele foi excelente para extrair fatos. Quando perguntado *"What is the main branch?"*, ele respondeu corretamente `main` (e não `master` ou `develop`), o que ajudou a descartar o Gitflow.
-
-* **O Papel do `flan-t5-large`:**
-    * Gerou um resumo textual que confirmou o entendimento, explicando que "developers should submit changes via Pull Requests", reforçando o modelo de colaboração distribuída.
+### Principais Descobertas
+1.  **O Efeito do Changelog no BART:** Ao adicionarmos o histórico de versões (`CHANGELOG.md`) ao contexto do BART, o modelo mudou sua classificação de *Rapid Releases* para *LTS*. Isso indica que o modelo interpretou a longa lista de versões passadas como um sinal de suporte estendido, ignorando a frequência semanal das datas.
+2.  **Limitações de Modelos Extrativos (QA):** O modelo RoBERTa conseguiu identificar a existência da branch `pre/beta`, validando sua capacidade de extração, mas não conseguiu deduzir que a ausência de uma branch `develop` implicava no GitHub Flow.
 
 ---
 
-## 🔗 4. Links da Atividade
-
-* **Tutorial em PDF:** [Link para o PDF no Google Drive/Classroom]
-* **Vídeo de Relato (YouTube):** [Link para o Vídeo]
-
-## 🖥️ 5. Infraestrutura Utilizada
-
-* **Ambiente:** Execução Local
-* **CPU:** [PREENCHA AQUI]
-* **RAM:** [PREENCHA AQUI]
-* **Python:** 3.10
+## 📂 Estrutura do Projeto
+```
+.
+├── Resultados/                  # Arquivos .txt com as saídas dos modelos
+├── Scripts/                     # Códigos Python organizados por modelo
+│   ├── deepset-roberta-base-squad2/
+│   ├── facebook-bart-large-mnli/
+│   └── [pasta_modelo_3]/
+├── requirements.txt             # Dependências do Python
+└── README.md                    # Este arquivo
+```
