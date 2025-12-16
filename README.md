@@ -49,3 +49,75 @@ Selecionamos 3 modelos distintos, focados em interpretação de texto, para vali
 
 ### 2.1. Estrutura de Pastas
 A estrutura do projeto para esta atividade é a seguinte:
+. ├── reports/ # Logs de execução e resultados (.txt) │ ├── resultado_classificacao_BART.txt │ ├── resultado_qa_RoBERTa.txt │ └── resultado_geracao_FlanT5.txt │ ├── scripts/ # Scripts Python desenvolvidos pela equipe │ ├── analise_classificacao.py (Modelo 1) │ ├── analise_qa.py (Modelo 2) │ └── analise_geracao.py (Modelo 3) │ ├── Scrapegraph-ai/ # O repositório alvo (apenas documentação necessária) ├── venv/ # Ambiente Virtual │ ├── README.md # Este documento └── requirements.txt # Dependências (transformers, torch, etc.)
+
+
+### 2.2. Instalação e Configuração
+
+1.  **Clone este repositório** e navegue para a pasta raiz.
+2.  **Crie e ative o ambiente virtual:**
+    ```bash
+    python -m venv venv
+    # Windows:
+    .\venv\Scripts\activate
+    # Linux/Mac:
+    source venv/bin/activate
+    ```
+3.  **Instale as dependências:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### 2.3. Execução dos Scripts
+
+Execute os scripts a partir da raiz do projeto para gerar os relatórios na pasta `reports/`:
+
+* **Modelo 1 (Classificação):**
+    ```bash
+    python scripts/analise_classificacao.py
+    ```
+* **Modelo 2 (Perguntas e Respostas):**
+    ```bash
+    python scripts/analise_qa.py
+    ```
+* **Modelo 3 (Geração de Resumo):**
+    ```bash
+    python scripts/analise_geracao.py
+    ```
+
+---
+
+## 📊 3. Resultados e Comparação
+
+Abaixo apresentamos a comparação entre o que os modelos encontraram e a realidade do projeto.
+
+| Modelo | Tarefa NLP | Branching Identificado | Estratégia Release Identificada | Efetividade |
+| :--- | :--- | :--- | :--- | :--- |
+| **`facebook/bart-large-mnli`** | Classificação (Zero-Shot) | **GitHub Flow** (Score Alto) | **Rapid Releases** (Score Médio) | **Alta** (Vencedor) |
+| **`deepset/roberta-base-squad2`** | Question Answering | Identificou "main branch" e "pull requests". | Inconclusivo (Respostas vagas). | **Média** |
+| **`google/flan-t5-large`** | Text Generation | Resumiu o uso de PRs corretamente. | Mencionou versionamento semântico. | **Alta** |
+
+### 3.1. Análise Detalhada e Justificativa
+
+* **Vencedor (Mais Efetivo): `facebook/bart-large-mnli`**
+    * **Justificativa:** Para identificar governança, muitas vezes precisamos classificar o projeto em "caixas" conceituais (ex: é Gitflow ou não?). O modelo Zero-Shot foi capaz de ler o texto ambíguo do `CONTRIBUTING.md` e atribuir corretamente a probabilidade mais alta para **GitHub Flow** e **Rapid Releases**, alinhando-se perfeitamente com nossa análise manual.
+
+* **O Papel do `roberta-base-squad2`:**
+    * Embora não tenha dado o "nome" da estratégia, ele foi excelente para extrair fatos. Quando perguntado *"What is the main branch?"*, ele respondeu corretamente `main` (e não `master` ou `develop`), o que ajudou a descartar o Gitflow.
+
+* **O Papel do `flan-t5-large`:**
+    * Gerou um resumo textual que confirmou o entendimento, explicando que "developers should submit changes via Pull Requests", reforçando o modelo de colaboração distribuída.
+
+---
+
+## 🔗 4. Links da Atividade
+
+* **Tutorial em PDF:** [Link para o PDF no Google Drive/Classroom]
+* **Vídeo de Relato (YouTube):** [Link para o Vídeo]
+
+## 🖥️ 5. Infraestrutura Utilizada
+
+* **Ambiente:** Execução Local
+* **CPU:** [PREENCHA AQUI]
+* **RAM:** [PREENCHA AQUI]
+* **Python:** 3.10
