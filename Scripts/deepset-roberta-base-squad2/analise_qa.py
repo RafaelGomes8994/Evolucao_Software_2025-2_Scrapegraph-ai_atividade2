@@ -13,7 +13,7 @@ print(f"Carregando {MODEL_NAME}...")
 qa_pipeline = pipeline('question-answering', model=MODEL_NAME)
 
 # 2. Ler contexto
-arquivo_alvo = os.path.join(path_repo, "CONTRIBUTING.md")
+arquivo_alvo = os.path.join(path_repo, "CONTRIBUTING.md", "CHANGELOG.md")
 if not os.path.exists(arquivo_alvo):
     arquivo_alvo = os.path.join(path_repo, "README.md")
 

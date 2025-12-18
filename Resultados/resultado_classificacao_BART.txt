@@ -1,12 +1,12 @@
 === RESULTADO MODELO 1 (CLASSIFICACAO) ===
-Arquivos analisados: CONTRIBUTING, README, CHANGELOG (parcial)
+Arquivos analisados: Todos os arquivos .md encontrados no repositório
 
 --- Branching Model ---
-Vencedor: Trunk Based Development
-Score: 0.3834
-2º Lugar: GitHub Flow (0.3446)
+Vencedor: GitHub Flow
+Score: 0.3746
+2º Lugar: Gitflow (0.3327)
 
 --- Release Strategy ---
 Vencedor: Long Term Support (LTS)
-Score: 0.4305
-2º Lugar: Rapid Releases (0.3083)
+Score: 0.3754
+2º Lugar: Rapid Releases (0.3309)

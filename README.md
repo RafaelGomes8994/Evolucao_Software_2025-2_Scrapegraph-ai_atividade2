@@ -1,9 +1,37 @@
 # 🚀 Atividade 2: Análise de Governança de Software com LLMs
 
-**Projeto Alvo:** `Scrapegraph-ai`
-**Disciplina:** Evolução de Software (2025.2)
+## 📋 Sumário
 
-Este repositório contém os artefatos e a automação desenvolvida para a análise de **Governança de Projetos Open Source** utilizando Inteligência Artificial. O objetivo é identificar automaticamente, através de Modelos de Linguagem (LLMs), as regras de contribuição e lançamento de versões do projeto.
+- [1. Sobre o Projeto](#-1-sobre-o-projeto)
+- [2. Projeto Selecionado](#-2-projeto-selecionado--scrapegraph-ai)
+- [3. Equipe](#-3-equipe)
+- [4. Metodologia e Objetivos](#-4-metodologia-e-objetivos)
+- [5. Identificação Manual da Arquitetura](#-5-identificação-manual-da-arquitetura)
+- [6. Análise com Modelos de Linguagem](#-6-análise-com-modelos-de-linguagem)
+- [7. Instalação e Execução](#-7-instalação-e-execução)
+- [8. Resultados e Discussão](#-8-resultados-e-discussão)
+- [9. Conclusões](#-9-conclusões)
+
+---
+
+## 📌 1. Sobre o Projeto
+
+Este repositório contém **toda a análise de governança** realizada pelo grupo sobre o projeto **Scrapegraph-ai**, incluindo:
+
+* Identificação manual das estratégias de **Branching** e **Releases**.
+* Análise automatizada utilizando **3 modelos de LLM** distintos.
+* Comparação entre a auditoria humana e a inteligência artificial.
+* Orquestração automatizada dos scripts de análise.
+
+O objetivo central da atividade foi avaliar se modelos de IA conseguem identificar corretamente padrões de fluxo de trabalho (como *Gitflow* ou *GitHub Flow*) e frequência de lançamentos em documentações técnicas.
+
+---
+
+## 🧩 2. Projeto Selecionado – Scrapegraph-ai
+
+O **Scrapegraph-ai** é uma biblioteca Python de *web scraping* que utiliza Grandes Modelos de Linguagem (LLMs) e lógica de grafos para criar pipelines de extração de dados flexíveis.
+
+O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, `CHANGELOG.md`) e um histórico ativo de lançamentos, sendo ideal para testar a capacidade de interpretação das IAs sobre regras de governança.
 
 ---
 
@@ -20,32 +48,89 @@ Este repositório contém os artefatos e a automação desenvolvida para a anál
 | José Victor Ribeiro de Jesus | 202300038799 | |
 | Mateus da Silva Barreto | 202300038879 | |
 
+**Estrutura de Trabalho:** O grupo atuou de forma colaborativa na auditoria manual e no desenvolvimento dos scripts de automação, dividindo-se entre a análise dos arquivos de documentação (*CONTRIBUTING*, *CHANGELOG*) e a implementação do pipeline de orquestração em Python.
+
 ---
 
-## 🎯 Metodologia e Objetivos
+## 🎯 4. Metodologia e Objetivos
 
 Nesta atividade, comparamos a análise humana (Auditoria Manual) com a análise automatizada por IAs para determinar:
-1.  **Branching Model (Fluxo de Trabalho):** Como o código é integrado? (Ex: Gitflow, GitHub Flow, Trunk-Based).
-2.  **Release Strategy (Estratégia de Lançamento):** Qual a frequência de lançamentos? (Ex: Rapid Releases, LTS, Release Train).
 
-### 1. A "Verdade" (Auditoria Manual)
+1. **Branching Model (Fluxo de Trabalho):** Como o código é integrado? (Ex: Gitflow, GitHub Flow, Trunk-Based).
+2. **Release Strategy (Estratégia de Lançamento):** Qual a frequência de lançamentos? (Ex: Rapid Releases, LTS, Release Train).
+
+### A "Verdade" (Auditoria Manual)
+
 Após auditoria nas abas *Branches* e *Releases* do repositório `Scrapegraph-ai`, a equipe identificou:
 * **Branching:** **GitHub Flow** (Apenas branch `main` ativa e branches de feature temporárias; ausência de branch `develop`).
 * **Releases:** **Rapid Releases** (Lançamentos semanais frequentes, ex: v1.66, v1.65).
 
-### 2. Os Modelos de IA Selecionados
+### Os Modelos de IA Selecionados
+
 Desenvolvemos scripts Python que utilizam a biblioteca `transformers` para ler arquivos de documentação (`CONTRIBUTING.md`, `CHANGELOG.md`, `README.md`).
 
 * **Modelo 1: `facebook/bart-large-mnli` (Classificação Zero-Shot)**
     * *Estratégia:* Analisa o texto combinado do `CONTRIBUTING.md` e `CHANGELOG.md` para classificar o projeto em categorias pré-definidas.
 * **Modelo 2: `deepset/roberta-base-squad2` (Question Answering)**
     * *Estratégia:* Realiza perguntas diretas ao texto (ex: "What is the main branch?") para extrair trechos específicos.
-* **Modelo 3: (Modelo Generativo)**
-    * *Estratégia:* Geração de resumo textual focado em governança.
+* **Modelo 3: `sshleifer/distilbart-cnn-12-6` (Sumarização)**
+    * *Estratégia:* Gera um resumo textual focado em palavras-chave de governança, ignorando ruídos visuais (imagens/links).
 
 ---
 
-## 🛠️ Instalação e Execução
+## 🏗️ 5. Identificação Manual da Arquitetura
+
+A análise manual (auditoria humana) concluiu que o Scrapegraph-ai segue:
+
+### ✔ Branching Model: GitHub Flow
+
+O projeto possui apenas a branch `main` como permanente e utiliza branches temporárias (ex: `pre/beta`) e Pull Requests diretos. Não há branch `develop` (característica do Gitflow).
+
+### ✔ Release Strategy: Rapid Releases
+
+O projeto realiza lançamentos frequentes (semanais ou quinzenais), focando sempre na versão atual ("Current") sem manter versões de Long Term Support (LTS).
+
+Um documento completo com as evidências está na pasta `Validação-Manual/`.
+
+---
+
+## 🤖 6. Análise com Modelos de Linguagem
+
+O projeto utilizou **3 abordagens de NLP** para tentar replicar a auditoria humana:
+
+### 6.1 facebook/bart-large-mnli (Classificação Zero-Shot)
+
+Utilizado para classificar o texto do projeto em categorias pré-definidas (*Gitflow* vs *GitHub Flow*, *LTS* vs *Rapid Releases*). Analisou o `CONTRIBUTING.md` e o `CHANGELOG.md`.
+
+### 6.2 deepset/roberta-base-squad2 (Question Answering)
+
+Modelo extrativo utilizado para responder perguntas pontuais, como "Qual é a branch principal?" e "Como contribuir?", buscando trechos exatos no texto.
+
+### 6.3 sshleifer/distilbart-cnn-12-6 (Sumarização)
+
+Modelo generativo utilizado para ler a documentação e criar um resumo focado nas regras de contribuição, ignorando ruídos visuais (badges e links).
+
+
+```
+.
+├── Resultados/                  # Arquivos .txt com as saídas dos modelos
+├── Validação-Manual/
+├   └── validação-humana.md      # Documentação da auditoria manual
+├── Scripts/                     # Códigos Python organizados por modelo
+│   ├── deepset-roberta-base-squad2/
+│   │   └── analise_qa.py
+│   ├── facebook-bart-large-mnli/
+│   │   └── analise_classificacao.py
+│   └── sshleifer-distilbart-cnn-12-6/
+│       └── analise_geracao.py
+├── organizador.py               # Orquestrador principal
+├── requirements.txt             # Dependências do Python
+└── README.md                    # Este arquivo
+```
+
+---
+
+## 🛠️ 7. Instalação e Execução
 
 ### Pré-requisitos
 * Python 3.10 ou superior
@@ -53,23 +138,16 @@ Desenvolvemos scripts Python que utilizam a biblioteca `transformers` para ler a
 
 ### Passo a Passo
 
-1.  **Clone este repositório da atividade:**
+1. **Clone este repositório da atividade:**
     ```bash
     git clone https://github.com/RafaelGomes8994/Evolucao_Software_2025-2_Scrapegraph-ai_atividade2.git
 
     cd Evolucao_Software_2025-2_Scrapegraph-ai_atividade2
     ```
 
-2.  **Clone o projeto alvo (Scrapegraph-ai) na raiz:**
-    É necessário ter o código do projeto alvo para que os scripts possam ler a documentação.
+2. **Crie e Configure o Ambiente Virtual (venv):**
     ```bash
-    git clone https://github.com/ScrapeGraphAI/Scrapegraph-ai.git
-    ```
-
-3.  **Crie e Configure o Ambiente Virtual (venv):**
-    Isso isola as dependências do projeto para evitar conflitos no seu sistema.
-    ```bash
-    # Cria o ambiente virtual chamado 'venv'
+    # Cria o ambiente virtual
     python -m venv venv
 
     # Ativa o ambiente:
@@ -79,49 +157,73 @@ Desenvolvemos scripts Python que utilizam a biblioteca `transformers` para ler a
     source venv/bin/activate
     ```
 
-4.  **Instale as Dependências:**
+3. **Instale as Dependências:**
     ```bash
     pip install -r requirements.txt
     ```
+    Dependências incluem: `transformers`, `torch`, `scipy`.
 
-5.  **Execute os Scripts de Análise:**
-    Os resultados serão gerados na pasta `Resultados/`.
-
+4. **Execute o Orquestrador:**
     ```bash
-    # Modelo 1: Classificação (BART)
-    python Scripts/facebook-bart-large-mnli/analise_classificacao.py
-
-    # Modelo 2: Perguntas e Respostas (RoBERTa)
-    python Scripts/deepset-roberta-base-squad2/analise_qa.py
-
-    # Modelo 3: Geração de Texto
-    python Scripts/google-flan-t5-large/analise_geracao.py
+    python orquestrador.py
     ```
+    Não é necessário rodar os scripts individualmente. O orquestrador executará o pipeline completo e os resultados serão gerados sequencialmente na pasta `Resultados/`.
 
 ---
 
-## 📊 Resultados e Discussão
+## 8. 💻 Configuração do Ambiente de Execução
+
+Os testes e a execução dos modelos de linguagem foram realizados em uma máquina local com as seguintes especificações. Esta documentação é relevante para justificar o tempo de inferência e a escolha de modelos otimizados (como versões `distil` ou `base`) em detrimento de modelos maiores.
+
+| Componente | Especificação Utilizada |
+| :--- | :--- |
+| **Sistema Operacional** | Windows 10/11 (64-bit) |
+| **Linguagem** | Python 3.10+ |
+| **Processador (CPU)** | Ryzen 5 3400 G  |
+| **Memória RAM** | 24 GB DDR4 3200 Mhz |
+| **Aceleração (GPU)** | AMD RX 580 8 GB DDR5 |
+| **Bibliotecas Chave** | `transformers`, `torch`, `scipy` |
+
+
+## 📊 9. Resultados e Discussão
+
+### 9.1 Resultados: BART MNLI (Classificação)
+
+* **Branching:** Com a expansão do contexto para todos os arquivos `.md`, o modelo refinou sua previsão e identificou corretamente o **GitHub Flow** (Score: 0.37), superando o *Trunk Based Development*.
+* **Releases:** Manteve a confusão ao ler o `CHANGELOG.md`. [cite_start]A lista extensa de versões passadas fez o modelo classificar erroneamente como **LTS (Long Term Support)**[cite: 9].
+
+### 9.2 Resultados: RoBERTa (QA)
+
+O modelo conseguiu extrair o nome da branch de desenvolvimento **`pre/beta`**, provando que é capaz de encontrar entidades no texto. No entanto, falhou em entender o contexto global da estratégia, não conseguindo responder perguntas subjetivas sobre o processo de release.
+
+### 9.3 Resultados: DistilBART (Sumarização)
+
+Foi o modelo mais perspicaz tecnicamente. [cite_start]Além de validar o fluxo de PRs, ele encontrou a menção crítica: *"follow Conventional Commits format for **semantic-release compatibility**"*[cite: 6].
+Isso é a "prova técnica" de que o projeto usa lançamentos automatizados (**Rapid Releases**), algo que o modelo de classificação não conseguiu deduzir.
+
+### Tabela Comparativa
 
 | Modelo | Tarefa NLP | Branching Identificado | Estratégia Release Identificada | Análise da Equipe |
 | :--- | :--- | :--- | :--- | :--- |
-| **BART-Large-MNLI** | Classificação | **Trunk Based Development** (Score: 0.38) | **Long Term Support - LTS** (Score: 0.43) | **Parcialmente Correto.** O modelo acertou o fluxo ágil (Trunk Based ≈ GitHub Flow), mas a inclusão do `CHANGELOG.md` (com histórico antigo) confundiu o modelo, levando-o a classificar erroneamente como LTS. |
-| **RoBERTa-SQuAD2** | QA (Extração) | Branch **`pre/beta`** | Inconclusivo | **Média.** O modelo foi eficaz em encontrar nomes de branches existentes no texto, mas falhou em interpretar o contexto global da estratégia. |
-| **Modelo 3** | Geração | *Aguardando Definição* | *Aguardando Definição* | *Análise Pendente* |
+| **BART-Large-MNLI** | Classificação | **GitHub Flow** (Score: 0.37) | **Long Term Support - LTS** (Score: 0.37) | **Alta Precisão no Fluxo.** Ao ler todos os arquivos de documentação, o modelo corrigiu sua previsão anterior e alinhou-se 100% com a auditoria manual (GitHub Flow). [cite_start]Porém, insistiu no erro de LTS para releases[cite: 9]. |
+| **RoBERTa-SQuAD2** | QA (Extração) | Branch **`pre/beta`** | Inconclusivo | **Média.** Útil para extrair nomes de branches específicas, mas sem capacidade de generalização sobre a estratégia. |
+| **DistilBART-CNN** | Sumarização | **"Push & open a PR to the pre-beta branch"** | Identificou **"Semantic-Release Compatibility"** | **Excelente (Insight Técnico).** O modelo encontrou a menção à ferramenta *Semantic Release*. [cite_start]Isso valida tecnicamente a estratégia de **Rapid Releases** (automação de versões) via evidência textual direta[cite: 6]. |
 
 ### Principais Descobertas
-1.  **O Efeito do Changelog no BART:** Ao adicionarmos o histórico de versões (`CHANGELOG.md`) ao contexto do BART, o modelo mudou sua classificação de *Rapid Releases* para *LTS*. Isso indica que o modelo interpretou a longa lista de versões passadas como um sinal de suporte estendido, ignorando a frequência semanal das datas.
-2.  **Limitações de Modelos Extrativos (QA):** O modelo RoBERTa conseguiu identificar a existência da branch `pre/beta`, validando sua capacidade de extração, mas não conseguiu deduzir que a ausência de uma branch `develop` implicava no GitHub Flow.
+
+1.  **A Vitória da Classificação (BART):** A estratégia de expandir o contexto para "todos os arquivos .md" foi decisiva para o modelo BART migrar de *Trunk Based* para **GitHub Flow**. Isso sugere que as regras de branch estavam dispersas em arquivos menores de documentação, e não apenas no CONTRIBUTING.md.
+
+2.  **O "Detetive" DistilBART:** Enquanto o BART tentou adivinhar a categoria (e errou dizendo LTS), o modelo generativo encontrou a evidência técnica: o uso de **Semantic Release**. Isso mostra que modelos generativos são melhores para auditoria técnica profunda, pois encontram as ferramentas que justificam a governança.
 
 ---
 
-## 📂 Estrutura do Projeto
-```
-.
-├── Resultados/                  # Arquivos .txt com as saídas dos modelos
-├── Scripts/                     # Códigos Python organizados por modelo
-│   ├── deepset-roberta-base-squad2/
-│   ├── facebook-bart-large-mnli/
-│   └── [pasta_modelo_3]/
-├── requirements.txt             # Dependências do Python
-└── README.md                    # Este arquivo
-```
+## 📌 10. Conclusões
+
+A combinação das análises permitiu concluir que:
+
+✅ **O Scrapegraph-ai adota GitHub Flow e Rapid Releases.**
+
+✅ **Limitações e Forças dos Modelos:**
+
+* **Classificação (BART):** Excelente para identificar o fluxo de trabalho quando alimentado com o contexto completo, mas suscetível a "ruídos" de dados históricos (confundindo histórico longo com suporte LTS).
+* **Sumarização (DistilBART):** Superou os outros ao identificar ferramentas específicas (*Semantic Release*, *Conventional Commits*), provando ser a abordagem mais robusta para entender *como* a governança é implementada tecnicamente, e não apenas qual rótulo ela recebe.

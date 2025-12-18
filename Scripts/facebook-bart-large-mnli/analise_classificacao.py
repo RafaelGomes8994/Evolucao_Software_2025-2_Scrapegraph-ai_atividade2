@@ -13,23 +13,29 @@ MODEL_NAME = "facebook/bart-large-mnli"
 print(f"Carregando {MODEL_NAME}...")
 classifier = pipeline("zero-shot-classification", model=MODEL_NAME)
 
-# 2. Ler documentação (Agora incluindo CHANGELOG para reforçar releases)
+# 2. Ler todos os arquivos .md
 def ler_arquivos_combinados(caminho_repo):
-    arquivos = ["CONTRIBUTING.md", "README.md", "CHANGELOG.md"]
+    arquivos_md = []
     texto_combinado = ""
     
-    for arq in arquivos:
-        caminho = os.path.join(caminho_repo, arq)
-        if os.path.exists(caminho):
-            try:
-                with open(caminho, "r", encoding="utf-8") as f:
-                    conteudo = f.read()
-                    # Pegamos os primeiros 1000 chars de cada um para ter variedade
-                    # O Changelog é crucial para a estratégia de release
-                    texto_combinado += f"--- Conteúdo de {arq} ---\n"
-                    texto_combinado += conteudo[:1500] + "\n\n"
-            except:
-                pass
+    # Buscar recursivamente todos os arquivos .md
+    for root, dirs, files in os.walk(caminho_repo):
+        for file in files:
+            if file.endswith(".md"):
+                arquivos_md.append(os.path.join(root, file))
+    
+    print(f"Encontrados {len(arquivos_md)} arquivos .md")
+    
+    for caminho in arquivos_md:
+        try:
+            with open(caminho, "r", encoding="utf-8") as f:
+                conteudo = f.read()
+                # Pegamos os primeiros 1000 chars de cada arquivo para ter variedade
+                nome_relativo = os.path.relpath(caminho, caminho_repo)
+                texto_combinado += f"--- Conteúdo de {nome_relativo} ---\n"
+                texto_combinado += conteudo[:1500] + "\n\n"
+        except Exception as e:
+            print(f"Erro ao ler {caminho}: {e}")
                 
     return texto_combinado
 
@@ -61,7 +67,7 @@ if not os.path.exists(pasta_resultados):
 
 with open(arquivo_saida, "w", encoding="utf-8") as f:
     f.write(f"=== RESULTADO MODELO 1 (CLASSIFICACAO) ===\n")
-    f.write(f"Arquivos analisados: CONTRIBUTING, README, CHANGELOG (parcial)\n\n")
+    f.write(f"Arquivos analisados: Todos os arquivos .md encontrados no repositório\n\n")
     
     f.write(f"--- Branching Model ---\n")
     f.write(f"Vencedor: {res_branch['labels'][0]}\n")

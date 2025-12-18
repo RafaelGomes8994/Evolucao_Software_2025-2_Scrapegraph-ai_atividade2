@@ -1,0 +1,3 @@
+=== RESUMO MODELO 3 (sshleifer/distilbart-cnn-12-6) ===
+
+ This PR contains commits that need to be rewritten to follow Conventional Commits format for semantic-release compatibility . The timeout documentation is marked as `feat(timeout)` (not `docs`) because it exposes a user-facing feature . This PR makes the feature discoverable and usable by users through documentation .
