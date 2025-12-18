@@ -9,8 +9,9 @@
 - [5. Identificação Manual da Arquitetura](#-5-identificação-manual-da-arquitetura)
 - [6. Análise com Modelos de Linguagem](#-6-análise-com-modelos-de-linguagem)
 - [7. Instalação e Execução](#-7-instalação-e-execução)
-- [8. Resultados e Discussão](#-8-resultados-e-discussão)
-- [9. Conclusões](#-9-conclusões)
+- [8. Configuração do Ambiente de Execução](#-8-Configuração-do-Ambiente-de-Execução)
+- [9. Resultados e Discussão](#-9-resultados-e-discussão)
+- [10. Conclusões](#-10-conclusões)
 
 ---
 
