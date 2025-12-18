@@ -1,6 +1,6 @@
-# 🚀 Atividade 2: Evolução de Software - Análise de Governança de Software com LLMs
+# 🚀 Evolução de Software - Análise de Governança de Software com LLMs
 
-## 📋 Sumário
+## 1.📋 Sumário
 
 - [1. Sobre o Projeto](#-1-sobre-o-projeto)
 - [2. Projeto Selecionado](#-2-projeto-selecionado--scrapegraph-ai)
@@ -14,7 +14,7 @@
 
 ---
 
-## 📌 1. Sobre o Projeto
+## 📌 2. Sobre o Projeto
 
 Este repositório contém **toda a análise de governança** realizada pelo grupo sobre o projeto **Scrapegraph-ai**, incluindo:
 
@@ -27,7 +27,7 @@ O objetivo central da atividade foi avaliar se modelos de IA conseguem identific
 
 ---
 
-## 🧩 2. Projeto Selecionado – Scrapegraph-ai
+## 🧩 3. Projeto Selecionado – Scrapegraph-ai
 
 O **Scrapegraph-ai** é uma biblioteca Python de *web scraping* que utiliza Grandes Modelos de Linguagem (LLMs) e lógica de grafos para criar pipelines de extração de dados flexíveis.
 
@@ -40,7 +40,7 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 | Nome Completo | Matrícula | Contribuição na Atividade |
 | :--- | :--- | :--- |
 | Maria Eduarda M. da Silva | 202300038860 | |
-| Rafael Gomes Oliveira Santos | 202300095730 | |
+| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMMS , Analise e Comparação dos Resultados  |
 | Cauan Teixeira Machado | 202300038627 | |
 | Pedro Joaquim Silva Silveira | 202300038897 | |
 | Breno Silva do Nascimento | 202300038968 | |
@@ -48,7 +48,7 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 | José Victor Ribeiro de Jesus | 202300038799 | |
 | Mateus da Silva Barreto | 202300038879 | |
 
-**Estrutura de Trabalho:** O grupo atuou de forma colaborativa na auditoria manual e no desenvolvimento dos scripts de automação, dividindo-se entre a análise dos arquivos de documentação (*CONTRIBUTING*, *CHANGELOG*) e a implementação do pipeline de orquestração em Python.
+**Estrutura de Trabalho:** O grupo atuou de forma colaborativa na auditoria manual e no desenvolvimento dos scripts de automação.
 
 ---
 
