@@ -143,6 +143,8 @@ Modelo generativo utilizado para ler a documentação e criar um resumo focado n
     git clone https://github.com/RafaelGomes8994/Evolucao_Software_2025-2_Scrapegraph-ai_atividade2.git
 
     cd Evolucao_Software_2025-2_Scrapegraph-ai_atividade2
+    
+    git clone https://github.com/ScrapeGraphAI/Scrapegraph-ai.git 
     ```
 
 2. **Crie e Configure o Ambiente Virtual (venv):**
