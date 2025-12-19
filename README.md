@@ -168,6 +168,23 @@ Modelo generativo utilizado para ler a documentação e criar um resumo focado n
     python organizador.py
     ```
     Não é necessário rodar os scripts individualmente. O orquestrador executará o pipeline completo e os resultados serão gerados sequencialmente na pasta `Resultados/`.
+   Ao final da execução, será exibida no terminal uma mensagem semelhante a:
+
+```bash
+✅ Sucesso: Modelo 3: DistilBART (Sumarização) finalizado.
+
+🎉 TODAS AS ANÁLISES FORAM CONCLUÍDAS!
+Verifique a pasta 'Resultados/' para ver os relatórios.
+```
+
+5. **Visualização dos resultados**
+
+Após a conclusão do processo acesse a pasta Resultados/, criada automaticamente na raiz do projeto. Nessa pasta estarão disponíveis os arquivos gerados por cada etapa do pipeline, incluindo:
+* Relatórios textuais
+* Resultados das análises
+* Saídas dos modelos de NLP (classificação, análise de sentimentos e sumarização)
+
+> Os arquivos podem ser abertos em qualquer editor de texto ou IDE (por exemplo, VS Code, PyCharm ou Bloco de Notas).
 
 ---
 
