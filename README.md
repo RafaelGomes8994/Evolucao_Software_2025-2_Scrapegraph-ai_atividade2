@@ -39,14 +39,14 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 
 | Nome Completo | Matrícula | Contribuição na Atividade |
 | :--- | :--- | :--- |
-| Maria Eduarda M. da Silva | 202300038860 | Contextualização Teórica, Descrição da Metodologia, Teste, Tutorial e Revisão |
-| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMs , Analise e Comparação dos Resultados  |
-| Cauan Teixeira Machado | 202300038627 | |
-| Pedro Joaquim Silva Silveira | 202300038897 | |
-| Breno Silva do Nascimento | 202300038968 | |
-| José Gabriel R. G. de Almeida | 202300095599 | |
-| José Victor Ribeiro de Jesus | 202300038799 | |
-| Mateus da Silva Barreto | 202300038879 | |
+| Maria Eduarda M. da Silva | 202300038860 | Contextualização Teórica, Descrição da Metodologia, Teste, Tutorial e Revisão. |
+| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMs e Implementação dos Scripts, Análise e Comparação dos Resultados |
+| Cauan Teixeira Machado | 202300038627 | Análise do Modelo RoBERTa (QA) |
+| Pedro Joaquim Silva Silveira | 202300038897 | Análise do Modelo RoBERTa (QA) |
+| Breno Silva do Nascimento | 202300038968 | Análise do Modelo DistilBART (Sumarização) |
+| José Gabriel R. G. de Almeida | 202300095599 | Análise do Modelo DistilBART (Sumarização) |
+| José Victor Ribeiro de Jesus | 202300038799 | Análise do Modelo BART (Classificação) |
+| Mateus da Silva Barreto | 202300038879 | Análise do Modelo BART (Classificação) |
 
 **Estrutura de Trabalho:** O grupo atuou de forma colaborativa na auditoria manual e no desenvolvimento dos scripts de automação.
 
