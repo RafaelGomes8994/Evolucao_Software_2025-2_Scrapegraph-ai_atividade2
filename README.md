@@ -25,6 +25,8 @@ Este repositório contém **toda a análise de governança** realizada pelo grup
 
 O objetivo central da atividade foi avaliar se modelos de IA conseguem identificar corretamente padrões de fluxo de trabalho (como *Gitflow* ou *GitHub Flow*) e frequência de lançamentos em documentações técnicas.
 
+> **⚠️ Nota de Escopo e Versionamento:** É importante ressaltar que toda a análise apresentada neste documento baseia-se na versão **v1.66.0** do projeto. A versão **v1.67.0**, lançada no repositório oficial apenas 6 horas antes da entrega desta atividade, não foi considerada no escopo desta auditoria para garantir a consistência dos dados coletados.
+
 ---
 
 ## 🧩 2. Projeto Selecionado – Scrapegraph-ai
