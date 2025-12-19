@@ -213,7 +213,11 @@ Os testes e a execução dos modelos de linguagem foram realizados em uma máqui
 
 ### 8.2 Resultados: RoBERTa (QA)
 
-O modelo conseguiu extrair o nome da branch de desenvolvimento **`pre/beta`**, provando que é capaz de encontrar entidades no texto. No entanto, falhou em entender o contexto global da estratégia, não conseguindo responder perguntas subjetivas sobre o processo de release.
+O modelo `roberta-base-squad2` apresentou dificuldades significativas de abstração e contexto:
+* **Branching:** Ao ser questionado sobre a "main branch", o modelo extraiu o nome do repositório (**"Scrapegraph-ai"**) com score baixo, falhando em identificar a estrutura de ramificação.
+* **Releases:** Para a estratégia de release, o modelo apenas apontou uma versão específica encontrada no texto (**"1.2.0-beta.1"**), sem conseguir deduzir a frequência ou estratégia de lançamento.
+
+Isso demonstra que modelos puramente extrativos podem ser insuficientes para auditorias que exigem entendimento do contexto global do projeto.
 
 ### 8.3 Resultados: DistilBART (Sumarização)
 
@@ -224,9 +228,10 @@ Isso é a "prova técnica" de que o projeto usa lançamentos automatizados (**Ra
 
 | Modelo | Tarefa NLP | Branching Identificado | Estratégia Release Identificada | Análise da Equipe |
 | :--- | :--- | :--- | :--- | :--- |
-| **BART-Large-MNLI** | Classificação | **GitHub Flow** (Score: 0.37) | **Long Term Support - LTS** (Score: 0.37) | **Alta Precisão no Fluxo.** Ao ler todos os arquivos de documentação, o modelo corrigiu sua previsão anterior e alinhou-se 100% com a auditoria manual (GitHub Flow). Porém, insistiu no erro de LTS para releases. |
-| **RoBERTa-SQuAD2** | QA (Extração) | Branch **`pre/beta`** | Inconclusivo | **Média.** Útil para extrair nomes de branches específicas, mas sem capacidade de generalização sobre a estratégia. |
-| **DistilBART-CNN** | Sumarização | **"Push & open a PR to the pre-beta branch"** | Identificou **"Semantic-Release Compatibility"** | **Excelente (Insight Técnico).** O modelo encontrou a menção à ferramenta *Semantic Release*. Isso valida tecnicamente a estratégia de **Rapid Releases** (automação de versões) via evidência textual direta. |
+| **BART-Large-MNLI** | Classificação | **GitHub Flow** (Score: 0.37) | **Long Term Support - LTS** (Score: 0.37) | **Alta Precisão no Fluxo.** Ao ler todos os arquivos, o modelo corrigiu sua previsão e acertou o GitHub Flow. Porém, insistiu no erro de LTS para releases. |
+| **RoBERTa-SQuAD2** | QA (Extração) | **"Scrapegraph-ai"** (Erro) | **"1.2.0-beta.1"** (Versão Isolada) | **Baixa.** O modelo falhou em interpretar o contexto, confundindo o nome do projeto com a branch e citando apenas uma versão específica. |
+| **DistilBART-CNN** | Sumarização | **"Push & open a PR to the pre-beta branch"** | Identificou **"Semantic-Release Compatibility"** | **Excelente (Insight Técnico).** O modelo encontrou a menção à ferramenta *Semantic Release*, validando tecnicamente a automação de versões. |
+
 
 ### Principais Descobertas
 
@@ -234,7 +239,7 @@ Isso é a "prova técnica" de que o projeto usa lançamentos automatizados (**Ra
 
 2. **O "Detetive" DistilBART:** Enquanto o BART tentou adivinhar a categoria (e errou dizendo LTS), o modelo generativo encontrou a evidência técnica: o uso de **Semantic Release**. Isso mostra que modelos generativos são melhores para auditoria técnica profunda, pois encontram as ferramentas que justificam a governança.
 
----
+
 
 ## 📌 9. Conclusões
 
@@ -244,5 +249,6 @@ A combinação das análises permitiu concluir que:
 
 ✅ **Limitações e Forças dos Modelos:**
 
-* **Classificação (BART):** Excelente para identificar o fluxo de trabalho quando alimentado com o contexto completo, mas suscetível a "ruídos" de dados históricos (confundindo histórico longo com suporte LTS).
-* **Sumarização (DistilBART):** Superou os outros ao identificar ferramentas específicas (*Semantic Release*, *Conventional Commits*), provando ser a abordagem mais robusta para entender *como* a governança é implementada tecnicamente, e não apenas qual rótulo ela recebe.
+* **Classificação (BART):** Excelente para identificar o fluxo de trabalho com contexto completo, mas suscetível a "ruídos" de dados históricos (alucinação de LTS).
+* **QA Extrativo (RoBERTa):** Mostrou-se o **menos eficaz** para esta tarefa. Por tentar extrair trechos exatos, o modelo perdeu o contexto geral, confundindo o nome do projeto com o nome da branch.
+* **Sumarização (DistilBART):** A abordagem vencedora. Superou os outros ao identificar ferramentas específicas (*Semantic Release*), provando ser a mais robusta para auditoria técnica.
