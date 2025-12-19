@@ -40,7 +40,7 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 
 | Nome Completo | Matrícula | Contribuição na Atividade |
 | :--- | :--- | :--- |
-| Maria Eduarda M. da Silva | 202300038860 | |
+| Maria Eduarda M. da Silva | 202300038860 | Contextualização Teórica, Descrição da Metodologia, Teste, Tutorial e Revisão |
 | Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMMS , Analise e Comparação dos Resultados  |
 | Cauan Teixeira Machado | 202300038627 | |
 | Pedro Joaquim Silva Silveira | 202300038897 | |
