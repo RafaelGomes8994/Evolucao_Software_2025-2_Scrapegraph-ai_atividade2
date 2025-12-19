@@ -1,21 +1,20 @@
 # 🚀 Evolução de Software - Análise de Governança de Software com LLMs
 
-## 1.📋 Sumário
+## .📋 Sumário
 
 - [1. Sobre o Projeto](#-1-sobre-o-projeto)
 - [2. Projeto Selecionado](#-2-projeto-selecionado--scrapegraph-ai)
-- [3. Equipe](#-3-equipe)
-- [4. Metodologia e Objetivos](#-4-metodologia-e-objetivos)
-- [5. Identificação Manual da Arquitetura](#-5-identificação-manual-da-arquitetura)
-- [6. Análise com Modelos de Linguagem](#-6-análise-com-modelos-de-linguagem)
-- [7. Instalação e Execução](#-7-instalação-e-execução)
-- [8. Configuração do Ambiente de Execução](#-8-Configuração-do-Ambiente-de-Execução)
-- [9. Resultados e Discussão](#-9-resultados-e-discussão)
-- [10. Conclusões](#-10-conclusões)
+- [3. Metodologia e Objetivos](#-3-metodologia-e-objetivos)
+- [4. Identificação Manual da Arquitetura](#-4-identificação-manual-da-arquitetura)
+- [5. Análise com Modelos de Linguagem](#-5-análise-com-modelos-de-linguagem)
+- [6. Instalação e Execução](#-6-instalação-e-execução)
+- [7. Configuração do Ambiente de Execução](#-7-Configuração-do-Ambiente-de-Execução)
+- [8. Resultados e Discussão](#-8-resultados-e-discussão)
+- [9. Conclusões](#-9-conclusões)
 
 ---
 
-## 📌 2. Sobre o Projeto
+## 📌 1. Sobre o Projeto
 
 Este repositório contém **toda a análise de governança** realizada pelo grupo sobre o projeto **Scrapegraph-ai**, incluindo:
 
@@ -28,7 +27,7 @@ O objetivo central da atividade foi avaliar se modelos de IA conseguem identific
 
 ---
 
-## 🧩 3. Projeto Selecionado – Scrapegraph-ai
+## 🧩 2. Projeto Selecionado – Scrapegraph-ai
 
 O **Scrapegraph-ai** é uma biblioteca Python de *web scraping* que utiliza Grandes Modelos de Linguagem (LLMs) e lógica de grafos para criar pipelines de extração de dados flexíveis.
 
@@ -41,7 +40,7 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 | Nome Completo | Matrícula | Contribuição na Atividade |
 | :--- | :--- | :--- |
 | Maria Eduarda M. da Silva | 202300038860 | Contextualização Teórica, Descrição da Metodologia, Teste, Tutorial e Revisão |
-| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMMS , Analise e Comparação dos Resultados  |
+| Rafael Gomes Oliveira Santos | 202300095730 | Validação Manual, Escolha dos LLMs , Analise e Comparação dos Resultados  |
 | Cauan Teixeira Machado | 202300038627 | |
 | Pedro Joaquim Silva Silveira | 202300038897 | |
 | Breno Silva do Nascimento | 202300038968 | |
@@ -53,7 +52,7 @@ O projeto foi escolhido por possuir uma documentação rica (`CONTRIBUTING.md`, 
 
 ---
 
-## 🎯 4. Metodologia e Objetivos
+## 🎯 3. Metodologia e Objetivos
 
 Nesta atividade, comparamos a análise humana (Auditoria Manual) com a análise automatizada por IAs para determinar:
 
@@ -79,7 +78,7 @@ Desenvolvemos scripts Python que utilizam a biblioteca `transformers` para ler a
 
 ---
 
-## 🏗️ 5. Identificação Manual da Arquitetura
+## 🏗️ 4. Identificação Manual da Arquitetura
 
 A análise manual (auditoria humana) concluiu que o Scrapegraph-ai segue:
 
@@ -95,19 +94,19 @@ Um documento completo com as evidências está na pasta `Validação-Manual/`.
 
 ---
 
-## 🤖 6. Análise com Modelos de Linguagem
+## 🤖 5. Análise com Modelos de Linguagem
 
 O projeto utilizou **3 abordagens de NLP** para tentar replicar a auditoria humana:
 
-### 6.1 facebook/bart-large-mnli (Classificação Zero-Shot)
+### 5.1 facebook/bart-large-mnli (Classificação Zero-Shot)
 
 Utilizado para classificar o texto do projeto em categorias pré-definidas (*Gitflow* vs *GitHub Flow*, *LTS* vs *Rapid Releases*). Analisou o `CONTRIBUTING.md` e o `CHANGELOG.md`.
 
-### 6.2 deepset/roberta-base-squad2 (Question Answering)
+### 5.2 deepset/roberta-base-squad2 (Question Answering)
 
 Modelo extrativo utilizado para responder perguntas pontuais, como "Qual é a branch principal?" e "Como contribuir?", buscando trechos exatos no texto.
 
-### 6.3 sshleifer/distilbart-cnn-12-6 (Sumarização)
+### 5.3 sshleifer/distilbart-cnn-12-6 (Sumarização)
 
 Modelo generativo utilizado para ler a documentação e criar um resumo focado nas regras de contribuição, ignorando ruídos visuais (badges e links).
 
@@ -131,7 +130,7 @@ Modelo generativo utilizado para ler a documentação e criar um resumo focado n
 
 ---
 
-## 🛠️ 7. Instalação e Execução
+## 🛠️ 6. Instalação e Execução
 
 ### Pré-requisitos
 * Python 3.10 ou superior
@@ -172,7 +171,7 @@ Modelo generativo utilizado para ler a documentação e criar um resumo focado n
 
 ---
 
-## 8. 💻 Configuração do Ambiente de Execução
+## 7. 💻 Configuração do Ambiente de Execução
 
 Os testes e a execução dos modelos de linguagem foram realizados em uma máquina local com as seguintes especificações. Esta documentação é relevante para justificar o tempo de inferência e a escolha de modelos otimizados (como versões `distil` ou `base`) em detrimento de modelos maiores.
 
@@ -186,18 +185,18 @@ Os testes e a execução dos modelos de linguagem foram realizados em uma máqui
 | **Bibliotecas Chave** | `transformers`, `torch`, `scipy` |
 
 
-## 📊 9. Resultados e Discussão
+## 📊 8. Resultados e Discussão
 
-### 9.1 Resultados: BART MNLI (Classificação)
+### 8.1 Resultados: BART MNLI (Classificação)
 
 * **Branching:** Com a expansão do contexto para todos os arquivos `.md`, o modelo refinou sua previsão e identificou corretamente o **GitHub Flow** (Score: 0.37), superando o *Trunk Based Development*.
 * **Releases:** Manteve a confusão ao ler o `CHANGELOG.md`. A lista extensa de versões passadas fez o modelo classificar erroneamente como **LTS (Long Term Support)**.
 
-### 9.2 Resultados: RoBERTa (QA)
+### 8.2 Resultados: RoBERTa (QA)
 
 O modelo conseguiu extrair o nome da branch de desenvolvimento **`pre/beta`**, provando que é capaz de encontrar entidades no texto. No entanto, falhou em entender o contexto global da estratégia, não conseguindo responder perguntas subjetivas sobre o processo de release.
 
-### 9.3 Resultados: DistilBART (Sumarização)
+### 8.3 Resultados: DistilBART (Sumarização)
 
 Foi o modelo mais perspicaz tecnicamente. Além de validar o fluxo de PRs, ele encontrou a menção crítica: *"follow Conventional Commits format for **semantic-release compatibility**"*.
 Isso é a "prova técnica" de que o projeto usa lançamentos automatizados (**Rapid Releases**), algo que o modelo de classificação não conseguiu deduzir.
@@ -218,7 +217,7 @@ Isso é a "prova técnica" de que o projeto usa lançamentos automatizados (**Ra
 
 ---
 
-## 📌 10. Conclusões
+## 📌 9. Conclusões
 
 A combinação das análises permitiu concluir que:
 
