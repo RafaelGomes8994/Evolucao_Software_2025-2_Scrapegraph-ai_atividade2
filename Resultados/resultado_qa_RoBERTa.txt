@@ -1,15 +1,15 @@
 === RESULTADO MODELO 2 (QA) ===
-Contexto: C:\Faculdade\Engenharia de Software 2\Evolucao_Software_2025-2_Scrapegraph-ai_atividade2\Scrapegraph-ai\README.md
+Contexto: CONTRIBUTING.md + CHANGELOG.md
 
 P: What is the main branch name?
 R: Scrapegraph-ai
-Score: 0.0119
+Score: 0.1336
 ------------------------------
 P: How do I submit a contribution?
-R: join our Discord server
-Score: 0.0275
+R: readme
+Score: 0.0138
 ------------------------------
 P: Is there a release schedule?
-R: ```
-Score: 0.0211
+R: 1.2.0-beta.1
+Score: 0.5585
 ------------------------------

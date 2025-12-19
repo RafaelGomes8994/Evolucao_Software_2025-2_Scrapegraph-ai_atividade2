@@ -3,10 +3,10 @@ Arquivos analisados: Todos os arquivos .md encontrados no repositório
 
 --- Branching Model ---
 Vencedor: GitHub Flow
-Score: 0.3746
-2º Lugar: Gitflow (0.3327)
+Score: 0.4370
+2º Lugar: Gitflow (0.3102)
 
 --- Release Strategy ---
 Vencedor: Long Term Support (LTS)
-Score: 0.3754
-2º Lugar: Rapid Releases (0.3309)
+Score: 0.4963
+2º Lugar: Release Train (0.2714)
